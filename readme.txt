@@ -38,10 +38,9 @@ Absolutely! You can use any theme you like, however we really recommend you to u
 
 == Screenshots ==
 
-1. Show the trigger URLs from Elementor's "Templates > Popups" page.
-2. 3 types of trigger URLs you can use.
-3. Use the trigger URL on a WordPress menu item.
-4. Use the trigger URL on a link in standard content.
+1. 3 types of trigger URLs of each popup: open, close, and toggle.
+2. Use the trigger URL on a WordPress menu item.
+3. Use the trigger URL on a link in standard content.
 
 == Installation ==
 
