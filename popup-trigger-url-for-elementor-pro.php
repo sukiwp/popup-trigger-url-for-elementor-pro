@@ -3,7 +3,7 @@
 Plugin Name: Popup Trigger URL for Elementor Pro
 Plugin URI: http://wordpress.org/plugins/popup-trigger-url-for-elementor-pro
 Description: Helps you to trigger Elementor Pro's popups (open, close, or toggle) from menus or any kind of link.
-Version: 1.0.0
+Version: 1.0.1
 Author: Suki WordPress Theme
 Author URI: https://sukiwp.com/#about
 License: GNU General Public License v2 or later
@@ -76,7 +76,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		if ( 'popup' === $_GET['elementor_library_type'] && 'link' === $column_name ) {
 			$id = 'elementor-pro-popup-trigger-urls-' . $post_id;
 			?>
-			<a href="<?php echo esc_attr( '#TB_inline?width=600&height=220&inlineId=' . $id ); ?>" onclick="javascript:;" class="thickbox button button-secondary"><?php esc_html_e( 'Show URLs', 'popup-trigger-url-for-elementor-pro' ); ?></a>
+			<a href="<?php echo esc_attr( '#TB_inline?width=600&height=300&inlineId=' . $id ); ?>" onclick="javascript:;" class="thickbox button button-secondary"><?php esc_html_e( 'Show URLs', 'popup-trigger-url-for-elementor-pro' ); ?></a>
 			<div id="<?php echo esc_attr( $id ); ?>" style="display: none;">
 				<div>
 					<h4><?php esc_html_e( 'Choose the trigger type, copy the URL, and paste into your links.', 'popup-trigger-url-for-elementor-pro' ); ?></h4>
@@ -103,6 +103,9 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 							<?php endforeach; ?>
 						</tbody>
 					</table>
+					<div class="notice inline notice-alt notice-warning" style="margin: 1em 0 0;">
+						<p><?php esc_html_e( 'IMPORTANT: You are required to set the "Display Conditions" settings of your popup to pages where you want the popup to show. Otherwise, your popup won\'t show up.', 'popup-trigger-url-for-elementor-pro' ); ?></p>
+					</div>
 				</div>
 			</div>
 			<?php

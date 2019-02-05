@@ -44,3 +44,7 @@ msgstr ""
 #: popup-trigger-url-for-elementor-pro.php:95
 msgid "Toggle"
 msgstr ""
+
+#: popup-trigger-url-for-elementor-pro.php:107
+msgid "IMPORTANT: You are required to set the \"Display Conditions\" settings of your popup to pages where you want the popup to show. Otherwise, your popup won't show up."
+msgstr ""
