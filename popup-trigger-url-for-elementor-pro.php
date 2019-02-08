@@ -58,7 +58,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 	 * @return array
 	 */
 	public function manage_list_columns( $columns ) {
-		if ( 'popup' === $_GET['elementor_library_type'] ) {
+		if ( isset( $_GET['elementor_library_type'] ) && 'popup' === $_GET['elementor_library_type'] ) {
 			$columns['link'] = esc_html__( 'Trigger URLs', 'popup-trigger-url-for-elementor-pro' );
 		}
 
@@ -73,7 +73,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 	 * @return array
 	 */
 	public function manage_list_columns_content( $column_name, $post_id ) {
-		if ( 'popup' === $_GET['elementor_library_type'] && 'link' === $column_name ) {
+		if ( isset( $_GET['elementor_library_type'] ) && 'popup' === $_GET['elementor_library_type'] && 'link' === $column_name ) {
 			$id = 'elementor-pro-popup-trigger-urls-' . $post_id;
 			?>
 			<a href="<?php echo esc_attr( '#TB_inline?width=600&height=300&inlineId=' . $id ); ?>" onclick="javascript:;" class="thickbox button button-secondary"><?php esc_html_e( 'Show URLs', 'popup-trigger-url-for-elementor-pro' ); ?></a>
