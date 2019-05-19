@@ -5,7 +5,7 @@
 	"uri": "http://wordpress.org/plugins/popup-trigger-url-for-elementor-pro",
 	"author": {
 		"name": "Suki WordPress Theme",
-		"url": "https://sukiwp.com/#about"
+		"url": "https://sukiwp.com/"
 	},
 	"version": "1.0.1",
 	"license": "GPL-2.0-or-later",
@@ -30,7 +30,7 @@
 		"gulp-zip": "^4.2.0"
 	},
 	"browserslist": [
-		"last 2 versions",
+		"last 1 version",
 		"ie >= 10"
 	],
 	"dependencies": {}
