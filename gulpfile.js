@@ -81,7 +81,7 @@ gulp.task( 'main_info', function() {
 		.pipe( replace( new RegExp( '(Text Domain: ).*' ), '$1' + info.name ) )
 		.pipe( replace( new RegExp( '(Tags: ).*' ), '$1' + info.keywords.join( ', ' ) ) )
 
-		.pipe( replace( new RegExp( '(\'' + info.name.replace( '-', '_' ).toUpperCase() + '_VERSION\', \').*?(\'.*)' ), '$1' + info.version + '$2' ) )
+		.pipe( replace( new RegExp( '(\'' + info.name.toUpperCase().split( '-' ).join( '_' ) + '_VERSION\', \').*?(\'.*)' ), '$1' + info.version + '$2' ) )
 
 		.pipe( gulp.dest( './' ) );
 } );

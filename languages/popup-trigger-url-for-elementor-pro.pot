@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Popup Trigger URL for Elementor Pro
+# Copyright (C) 2020 Popup Trigger URL for Elementor Pro
 # This file is distributed under the same license as the Popup Trigger URL for Elementor Pro package.
 msgid ""
 msgstr ""
@@ -13,38 +13,42 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: popup-trigger-url-for-elementor-pro.php:62
+#: popup-trigger-url-for-elementor-pro.php:65
 msgid "Trigger URLs"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:79
+#: popup-trigger-url-for-elementor-pro.php:82
 msgid "Show URLs"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:82
+#: popup-trigger-url-for-elementor-pro.php:85
 msgid "Choose the trigger type, copy the URL, and paste into your links."
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:86
+#: popup-trigger-url-for-elementor-pro.php:89
 msgid "Type"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:87
+#: popup-trigger-url-for-elementor-pro.php:90
 msgid "URL"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:93
+#: popup-trigger-url-for-elementor-pro.php:96
 msgid "Open"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:94
+#: popup-trigger-url-for-elementor-pro.php:97
 msgid "Close"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:95
+#: popup-trigger-url-for-elementor-pro.php:98
 msgid "Toggle"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:107
+#: popup-trigger-url-for-elementor-pro.php:110
 msgid "IMPORTANT: You are required to set the \"Display Conditions\" settings of your popup to pages where you want the popup to show. Otherwise, your popup won't show up."
+msgstr ""
+
+#: popup-trigger-url-for-elementor-pro.php:156
+msgid "Since Elementor 2.9, there are some changes to the way Elementor generates the trigger links. This caused all previously copied trigger URLs did not work anymore. Please re-copy the new trigger URLs (from our plugin) and then paste it to your links."
 msgstr ""

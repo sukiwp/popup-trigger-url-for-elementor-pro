@@ -3,7 +3,7 @@
 Plugin Name: Popup Trigger URL for Elementor Pro
 Plugin URI: http://wordpress.org/plugins/popup-trigger-url-for-elementor-pro
 Description: Helps you to trigger Elementor Pro's popups (open, close, or toggle) from menus or any kind of link.
-Version: 1.0.1
+Version: 1.0.2
 Author: Suki WordPress Theme
 Author URI: https://sukiwp.com/
 License: GNU General Public License v2 or later
@@ -42,6 +42,9 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_filter( 'manage_elementor_library_posts_columns', array( $this, 'manage_list_columns' ), 20 );
 		add_action( 'manage_elementor_library_posts_custom_column', array( $this, 'manage_list_columns_content' ), 10, 2 );
+
+		add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
+		add_action( 'wp_ajax_popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9', array( $this, 'ajax_dismiss_notice_elementor_2_9' ) );
 	}
 
 	/**
@@ -76,7 +79,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		if ( isset( $_GET['elementor_library_type'] ) && 'popup' === $_GET['elementor_library_type'] && 'link' === $column_name ) {
 			$id = 'elementor-pro-popup-trigger-urls-' . $post_id;
 			?>
-			<a href="<?php echo esc_attr( '#TB_inline?width=600&height=300&inlineId=' . $id ); ?>" onclick="javascript:;" class="thickbox button button-secondary"><?php esc_html_e( 'Show URLs', 'popup-trigger-url-for-elementor-pro' ); ?></a>
+			<a href="<?php echo esc_attr( '#TB_inline?width=600&height=315&inlineId=' . $id ); ?>" onclick="javascript:;" class="thickbox button button-secondary"><?php esc_html_e( 'Show URLs', 'popup-trigger-url-for-elementor-pro' ); ?></a>
 			<div id="<?php echo esc_attr( $id ); ?>" style="display: none;">
 				<div>
 					<h4><?php esc_html_e( 'Choose the trigger type, copy the URL, and paste into your links.', 'popup-trigger-url-for-elementor-pro' ); ?></h4>
@@ -90,9 +93,9 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 						<tbody>
 							<?php
 							$types = array(
-								'open'   => esc_html__( 'Open', 'popup-trigger-url-for-elementor-pro' ),
-								'close'  => esc_html__( 'Close', 'popup-trigger-url-for-elementor-pro' ),
-								'toggle' => esc_html__( 'Toggle', 'popup-trigger-url-for-elementor-pro' ),
+								'popup:open'   => esc_html__( 'Open', 'popup-trigger-url-for-elementor-pro' ),
+								'popup:close'  => esc_html__( 'Close', 'popup-trigger-url-for-elementor-pro' ),
+								'popup:toggle' => esc_html__( 'Toggle', 'popup-trigger-url-for-elementor-pro' ),
 							);
 
 							foreach ( $types as $action => $label ) : ?>
@@ -120,12 +123,64 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 	 * @return string
 	 */
 	public function generate_url( $action, $id ) {
-		$settings = array(
-			'id'     => strval( $id ),
-			'toggle' => 'toggle' === $action,
+		return \Elementor\Plugin::instance()->frontend->create_action_hash(
+			$action,
+			array(
+				'id'     => strval( $id ),
+				'toggle' => 'toggle' === $action,
+			)
 		);
+	}
 
-		return '#' . rawurlencode( 'elementor-action:action=popup:' . ( 'close' === $action ? 'close' : 'open' ) . ' settings=' . base64_encode( wp_json_encode( $settings ) ) );
+	/**
+	 * Render admin notice to remind users to update their manual trigger links since the new Elementor 2.9.
+	 */
+	public function render_notice_elementor_2_9() {
+		// Show notice to users that have "edit_posts" capability.
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+
+		// Do not show the notice if Elementor version is less than 2.9.0.
+		if ( ! defined( 'ELEMENTOR_VERSION' ) || version_compare( ELEMENTOR_VERSION, '2.9.0', '<' ) ) {
+			return;
+		}
+
+		// Do not show the notice if notice has been dismissed before.
+		if ( 1 === intval( get_option( 'popup_trigger_url_for_elementor_pro__dismiss_notice__elementor_2_9' ) ) ) {
+			return;
+		}
+		?>
+		<div id="popup-trigger-url-for-elementor-pro--notice--elementor-2-9" class="notice notice-warning is-dismissible">
+			<p><span class="dashicons dashicons-warning"></span>&nbsp;&nbsp;<strong><?php esc_html_e( 'Message from "Popup Trigger URL for Elementor Pro" plugin:', 'suki' ); ?></strong></p>
+			<p><?php esc_html_e( 'Since Elementor 2.9, there are some changes to the way Elementor generates the trigger links. This caused all previously copied trigger URLs did not work anymore. Please re-copy the new trigger URLs (from our plugin) and then paste it to your links.', 'popup-trigger-url-for-elementor-pro' ); ?></p>
+		</div>
+		<script type="text/javascript">
+			(function( $ ) {
+				'use strict';
+
+				$( document ).on( 'click', '#popup-trigger-url-for-elementor-pro--notice--elementor-2-9 .notice-dismiss', function( e ) {
+					e.preventDefault();
+
+					return $.ajax({
+						method: 'POST',
+						url: ajaxurl,
+						data: {
+							action: 'popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9',
+						},
+					});
+				});
+			})( jQuery );
+		</script>
+		<?php
+	}
+
+	/**
+	 * AJAX callback to dismiss Elementor 2.9 notice forever.
+	 */
+	public function ajax_dismiss_notice_elementor_2_9() {
+		update_option( 'popup_trigger_url_for_elementor_pro__dismiss_notice__elementor_2_9', 1 );
+		wp_die();
 	}
 }
 
