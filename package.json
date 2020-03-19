@@ -22,12 +22,12 @@
 		}
 	],
 	"devDependencies": {
-		"del": "^4.1.1",
+		"del": "^5.1.0",
 		"gulp": "^4.0.2",
 		"gulp-replace": "^1.0.0",
 		"gulp-watch": "^5.0.1",
-		"gulp-wp-pot": "^2.3.5",
-		"gulp-zip": "^4.2.0"
+		"gulp-wp-pot": "^2.3.6",
+		"gulp-zip": "^5.0.1"
 	},
 	"browserslist": [
 		"last 1 version",
