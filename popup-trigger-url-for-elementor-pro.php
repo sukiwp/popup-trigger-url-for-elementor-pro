@@ -45,6 +45,8 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 
 		add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
 		add_action( 'wp_ajax_popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9', array( $this, 'ajax_dismiss_notice_elementor_2_9' ) );
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -93,9 +95,9 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 						<tbody>
 							<?php
 							$types = array(
-								'popup:open'   => esc_html__( 'Open', 'popup-trigger-url-for-elementor-pro' ),
-								'popup:close'  => esc_html__( 'Close', 'popup-trigger-url-for-elementor-pro' ),
-								'popup:toggle' => esc_html__( 'Toggle', 'popup-trigger-url-for-elementor-pro' ),
+								'open'   => esc_html__( 'Open', 'popup-trigger-url-for-elementor-pro' ),
+								'close'  => esc_html__( 'Close', 'popup-trigger-url-for-elementor-pro' ),
+								'toggle' => esc_html__( 'Toggle', 'popup-trigger-url-for-elementor-pro' ),
 							);
 
 							foreach ( $types as $action => $label ) : ?>
@@ -124,7 +126,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 	 */
 	public function generate_url( $action, $id ) {
 		return \Elementor\Plugin::instance()->frontend->create_action_hash(
-			$action,
+			'close' === $action ? 'popup:close' : 'popup:open',
 			array(
 				'id'     => strval( $id ),
 				'toggle' => 'toggle' === $action,
@@ -181,6 +183,23 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 	public function ajax_dismiss_notice_elementor_2_9() {
 		update_option( 'popup_trigger_url_for_elementor_pro__dismiss_notice__elementor_2_9', 1 );
 		wp_die();
+	}
+
+	public function enqueue_scripts() {
+		ob_start();
+		?>
+		(function() {
+			'use strict';
+
+			elementorFrontend.elements.$document.on( 'click', 'a[href^="http://%23elementor-action"]', function( e ) {
+				e.preventDefault();
+				elementorFrontend.utils.urlActions.runAction( jQuery( e.currentTarget ).attr( 'href' ).replace( 'http://', '' ), e );
+			});
+		})();
+		<?php
+		$js = ob_get_clean();
+
+		wp_add_inline_script( 'elementor-frontend', $js );
 	}
 }
 
