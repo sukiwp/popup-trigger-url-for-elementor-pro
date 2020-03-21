@@ -43,7 +43,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		add_filter( 'manage_elementor_library_posts_columns', array( $this, 'manage_list_columns' ), 20 );
 		add_action( 'manage_elementor_library_posts_custom_column', array( $this, 'manage_list_columns_content' ), 10, 2 );
 
-		add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
+		// add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
 		add_action( 'wp_ajax_popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9', array( $this, 'ajax_dismiss_notice_elementor_2_9' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -81,23 +81,24 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		if ( isset( $_GET['elementor_library_type'] ) && 'popup' === $_GET['elementor_library_type'] && 'link' === $column_name ) {
 			$id = 'elementor-pro-popup-trigger-urls-' . $post_id;
 			?>
-			<a href="<?php echo esc_attr( '#TB_inline?width=600&height=315&inlineId=' . $id ); ?>" onclick="javascript:;" class="thickbox button button-secondary"><?php esc_html_e( 'Show URLs', 'popup-trigger-url-for-elementor-pro' ); ?></a>
+			<a href="<?php echo esc_attr( '#TB_inline?width=800&height=360&inlineId=' . $id ); ?>" onclick="javascript:;" class="thickbox button button-secondary"><?php esc_html_e( 'Show URLs', 'popup-trigger-url-for-elementor-pro' ); ?></a>
 			<div id="<?php echo esc_attr( $id ); ?>" style="display: none;">
 				<div>
 					<h4><?php esc_html_e( 'Choose the trigger type, copy the URL, and paste into your links.', 'popup-trigger-url-for-elementor-pro' ); ?></h4>
 					<table class="widefat fixed striped">
 						<thead>
 							<tr>
-								<th width="100px"><?php esc_html_e( 'Type', 'popup-trigger-url-for-elementor-pro' ); ?></th>
+								<th width="175px"><?php esc_html_e( 'Type', 'popup-trigger-url-for-elementor-pro' ); ?></th>
 								<th width="100%"><?php esc_html_e( 'URL', 'popup-trigger-url-for-elementor-pro' ); ?></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
 							$types = array(
-								'open'   => esc_html__( 'Open', 'popup-trigger-url-for-elementor-pro' ),
-								'close'  => esc_html__( 'Close', 'popup-trigger-url-for-elementor-pro' ),
-								'toggle' => esc_html__( 'Toggle', 'popup-trigger-url-for-elementor-pro' ),
+								'open'          => esc_html__( 'Open', 'popup-trigger-url-for-elementor-pro' ),
+								'toggle'        => esc_html__( 'Toggle', 'popup-trigger-url-for-elementor-pro' ),
+								'close'         => esc_html__( 'Close', 'popup-trigger-url-for-elementor-pro' ),
+								'close-forever' => esc_html__( 'Close (Don\'t Show Again)', 'popup-trigger-url-for-elementor-pro' ),
 							);
 
 							foreach ( $types as $action => $label ) : ?>
@@ -125,13 +126,38 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 	 * @return string
 	 */
 	public function generate_url( $action, $id ) {
-		return \Elementor\Plugin::instance()->frontend->create_action_hash(
-			'close' === $action ? 'popup:close' : 'popup:open',
-			array(
-				'id'     => strval( $id ),
-				'toggle' => 'toggle' === $action,
-			)
-		);
+		$url = '';
+
+		// Generate the URL based on its action using the native Elementor's function.
+		switch ( $action ) {
+			case 'close':
+			case 'close-forever':
+				$url = \Elementor\Plugin::instance()->frontend->create_action_hash(
+					'popup:close',
+					array(
+						'do_not_show_again' => 'close-forever' === $action ? 'yes' : '',
+					)
+				);
+				break;
+			
+			case 'open':
+			case 'toggle':
+			default:
+				$url = \Elementor\Plugin::instance()->frontend->create_action_hash(
+					'popup:open',
+					array(
+						'id'     => strval( $id ),
+						'toggle' => 'toggle' === $action,
+					)
+				);
+				break;
+		}
+
+		// Revert back the encoded "%23" to "#" to prevent WordPress automatically adding "http://" prefix in the URL.
+		// This also works as a fallback compatibility for the old version.
+		$url = str_replace( '%23', '#', $url );
+
+		return $url;
 	}
 
 	/**
@@ -155,7 +181,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		?>
 		<div id="popup-trigger-url-for-elementor-pro--notice--elementor-2-9" class="notice notice-warning is-dismissible">
 			<p><span class="dashicons dashicons-warning"></span>&nbsp;&nbsp;<strong><?php esc_html_e( 'Message from "Popup Trigger URL for Elementor Pro" plugin:', 'suki' ); ?></strong></p>
-			<p><?php esc_html_e( 'Since Elementor 2.9, there are some changes to the way Elementor generates the trigger links. This caused all previously copied trigger URLs did not work anymore. Please re-copy the new trigger URLs (from our plugin) and then paste it to your links.', 'popup-trigger-url-for-elementor-pro' ); ?></p>
+			<p><?php esc_html_e( 'Since Elementor 2.9, there are some changes to the way Elementor generates the trigger URLs. This caused all your previously copied trigger URLs might not work anymore. Please review all your links. If it doesn\'t work, you can re-copy the new trigger URLs and then paste it again on your links.', 'popup-trigger-url-for-elementor-pro' ); ?></p>
 		</div>
 		<script type="text/javascript">
 			(function( $ ) {
@@ -185,15 +211,16 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		wp_die();
 	}
 
+	/**
+	 * Add inline javascript for handling the old trigger URLs.
+	 */
 	public function enqueue_scripts() {
 		ob_start();
 		?>
 		(function() {
-			'use strict';
-
-			elementorFrontend.elements.$document.on( 'click', 'a[href^="http://%23elementor-action"]', function( e ) {
+			elementorFrontend.elements.$document.on( 'click', 'a[href^="#elementor-action"]', function( e ) {
 				e.preventDefault();
-				elementorFrontend.utils.urlActions.runAction( jQuery( e.currentTarget ).attr( 'href' ).replace( 'http://', '' ), e );
+				elementorFrontend.utils.urlActions.runAction( jQuery( e.currentTarget ).attr( 'href' ), e );
 			});
 		})();
 		<?php
