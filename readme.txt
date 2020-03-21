@@ -57,7 +57,8 @@ Absolutely! You can use any theme you like. But if you want a really ligthweight
 
 = v1.0.2 =
 
-* Fix error on trigger URLs because Elementor 2.9 has udpated their URL generation method.
+* Add trigger URL to Close popup with "Don't show again" mode.
+* Add very tiny javascript for fallback compatibility and to fix error on trigger URLs because Elementor 2.9 just updated their URL generation method.
 
 = v1.0.1 =
 
