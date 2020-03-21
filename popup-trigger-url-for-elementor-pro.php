@@ -43,7 +43,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		add_filter( 'manage_elementor_library_posts_columns', array( $this, 'manage_list_columns' ), 20 );
 		add_action( 'manage_elementor_library_posts_custom_column', array( $this, 'manage_list_columns_content' ), 10, 2 );
 
-		// add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
+		add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
 		add_action( 'wp_ajax_popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9', array( $this, 'ajax_dismiss_notice_elementor_2_9' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -180,14 +180,15 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		}
 		?>
 		<div id="popup-trigger-url-for-elementor-pro--notice--elementor-2-9" class="notice notice-warning is-dismissible">
-			<p><span class="dashicons dashicons-warning"></span>&nbsp;&nbsp;<strong><?php esc_html_e( 'Message from "Popup Trigger URL for Elementor Pro" plugin:', 'suki' ); ?></strong></p>
-			<p><?php esc_html_e( 'Since Elementor 2.9, there are some changes to the way Elementor generates the trigger URLs. This caused all your previously copied trigger URLs might not work anymore. Please review all your links. If it doesn\'t work, you can re-copy the new trigger URLs and then paste it again on your links.', 'popup-trigger-url-for-elementor-pro' ); ?></p>
+			<p><span class="dashicons dashicons-warning"></span>&nbsp;&nbsp;<strong><?php esc_html_e( 'Message from "Popup Trigger URL for Elementor Pro" plugin:', 'popup-trigger-url-for-elementor-pro' ); ?></strong></p>
+			<p><?php esc_html_e( 'Since Elementor 2.9, there are some changes to the way Elementor generates the trigger URLs. This caused all your previously copied trigger URLs might not work anymore. Please review all your links. If it doesn\'t work, you can re-copy the new trigger URLs and then renew all your links.', 'popup-trigger-url-for-elementor-pro' ); ?></p>
+			<p><button class="popup-trigger-url-for-elementor-pro--notice--dismiss button button-secondary"><?php esc_html_e( 'Dismiss this notice forever', 'popup-trigger-url-for-elementor-pro' ); ?></button></p>
 		</div>
 		<script type="text/javascript">
 			(function( $ ) {
 				'use strict';
 
-				$( document ).on( 'click', '#popup-trigger-url-for-elementor-pro--notice--elementor-2-9 .notice-dismiss', function( e ) {
+				$( document ).on( 'click', '#popup-trigger-url-for-elementor-pro--notice--elementor-2-9 .popup-trigger-url-for-elementor-pro--notice--dismiss', function( e ) {
 					e.preventDefault();
 
 					return $.ajax({

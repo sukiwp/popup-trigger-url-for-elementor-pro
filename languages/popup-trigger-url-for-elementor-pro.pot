@@ -53,6 +53,14 @@ msgstr ""
 msgid "IMPORTANT: You are required to set the \"Display Conditions\" settings of your popup to pages where you want the popup to show. Otherwise, your popup won't show up."
 msgstr ""
 
+#: popup-trigger-url-for-elementor-pro.php:183
+msgid "Message from \"Popup Trigger URL for Elementor Pro\" plugin:"
+msgstr ""
+
 #: popup-trigger-url-for-elementor-pro.php:184
-msgid "Since Elementor 2.9, there are some changes to the way Elementor generates the trigger URLs. This caused all your previously copied trigger URLs might not work anymore. Please review all your links. If it doesn't work, you can re-copy the new trigger URLs and then paste it again on your links."
+msgid "Since Elementor 2.9, there are some changes to the way Elementor generates the trigger URLs. This caused all your previously copied trigger URLs might not work anymore. Please review all your links. If it doesn't work, you can re-copy the new trigger URLs and then renew all your links."
+msgstr ""
+
+#: popup-trigger-url-for-elementor-pro.php:185
+msgid "Dismiss this notice forever"
 msgstr ""
