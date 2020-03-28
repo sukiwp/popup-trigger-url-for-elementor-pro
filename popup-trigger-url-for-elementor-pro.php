@@ -46,7 +46,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
 		add_action( 'wp_ajax_popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9', array( $this, 'ajax_dismiss_notice_elementor_2_9' ) );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'elementor/frontend/after_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -219,7 +219,7 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 		ob_start();
 		?>
 		(function() {
-			elementorFrontend.elements.$document.on( 'click', 'a[href^="#elementor-action"]', function( e ) {
+			jQuery( document ).on( 'click', 'a[href^="#elementor-action"]', function( e ) {
 				e.preventDefault();
 				elementorFrontend.utils.urlActions.runAction( jQuery( e.currentTarget ).attr( 'href' ), e );
 			});

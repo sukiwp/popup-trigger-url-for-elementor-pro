@@ -55,6 +55,10 @@ Absolutely! You can use any theme you like. But if you want a really ligthweight
 
 == Changelog ==
 
+= v1.0.3 =
+
+* Fix JS error when elementor-frontend.js is merged by cache plugins.
+
 = v1.0.2 =
 
 * Add trigger URL to Close popup with "Don't show again" mode.

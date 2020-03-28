@@ -19,6 +19,10 @@
 		{
 			"name": "sukiwp",
 			"url": "https://profiles.wordpress.org/sukiwp"
+		},
+		{
+			"name": "daviedr",
+			"url": "https://profiles.wordpress.org/daviedr"
 		}
 	],
 	"devDependencies": {
