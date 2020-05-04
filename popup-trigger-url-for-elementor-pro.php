@@ -191,12 +191,21 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 				$( document ).on( 'click', '#popup-trigger-url-for-elementor-pro--notice--elementor-2-9 .popup-trigger-url-for-elementor-pro--notice--dismiss', function( e ) {
 					e.preventDefault();
 
+					var $notice = $( this ).closest( '.notice' );
+
 					return $.ajax({
 						method: 'POST',
 						url: ajaxurl,
 						data: {
 							action: 'popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9',
 						},
+					})
+					.done(function( response, status, XHR ) {
+						$notice.fadeTo( 100, 0, function() {
+							$notice.slideUp( 100, function() {
+								$notice.remove();
+							});
+						});
 					});
 				});
 			})( jQuery );
