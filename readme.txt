@@ -3,7 +3,7 @@ Contributors: sukiwp, daviedr
 Tags: 
 Requires at least: 4.6
 Tested up to: 5.2
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -54,6 +54,10 @@ Absolutely! You can use any theme you like. But if you want a really ligthweight
 3. Click Install button and then Activate the plugin right away.
 
 == Changelog ==
+
+= v1.0.4 =
+
+* Fix notification removal on admin pages when Dismiss button clicked.
 
 = v1.0.3 =
 
