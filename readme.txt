@@ -2,7 +2,7 @@
 Contributors: sukiwp, daviedr
 Tags: 
 Requires at least: 4.6
-Tested up to: 5.2
+Tested up to: 5.4
 Stable tag: 1.0.4
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -36,9 +36,12 @@ This plugin allows you to trigger any Elementor Pro's popup using links at anywh
 
 = "Not working, my popup doesn't show" =
 
-- Please make sure that you have properly set your popup's "Display Conditions" to pages where you want the popup to show. Otherwise, your popup won't show up.
+- Please check if the popup can be triggered using Elementor's Dynamic Action link. If it can't be triggered, then there must be something wrong in your popup configuration, not the trigger URL from our plugin.
+- Please make sure that you have properly set the popup's "Display Conditions". Otherwise, your popup won't show up.
+- Please make sure that you copied the trigger URL correctly into your link.
 - Please check if there is javascript error that might be caused by other plugins (check your browser's Developer Tools > Console).
-- Please check if the popup can be triggered using Elementor's button widget (with Dynamic Action link). If the button can't trigger the popup too, then there must be something wrong in your popup configuration, not the trigger URL.
+
+Still not working? Feel free to [write a ticket](https://wordpress.org/support/plugin/popup-trigger-url-for-elementor-pro/) on the support forum.
 
 == Frequently Asked Questions ==
 
@@ -48,9 +51,10 @@ No, the popup feature is only available on Elementor Pro version. Therefore Elem
 
 = "Not working, my popup doesn't show up" =
 
-- Please make sure that you have properly set the "Display Conditions" of your popup.
+- Please check if the popup can be triggered using Elementor's Dynamic Action link. If it can't be triggered, then there must be something wrong in your popup configuration, not the trigger URL from our plugin.
+- Please make sure that you have properly set the popup's "Display Conditions". Otherwise, your popup won't show up.
+- Please make sure that you copied the trigger URL correctly into your link.
 - Please check if there is javascript error that might be caused by other plugins (check your browser's Developer Tools > Console).
-- Please check if the popup can be triggered using Elementor's button widget (with Dynamic Action link). If the button can't trigger the popup too, then there must be something wrong in your popup configuration, not the trigger URL.
 
 = Does it work with any other popup plugin? =
 
