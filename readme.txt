@@ -78,6 +78,10 @@ Absolutely! You can use any theme you like. You might want to try our theme: [Su
 
 == Changelog ==
 
+= v1.0.5 =
+
+* Fix bug on "toggle" trigger since Elementor Pro v2.10.
+
 = v1.0.4 =
 
 * Fix notification removal on admin pages when Dismiss button clicked.

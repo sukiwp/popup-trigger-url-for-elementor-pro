@@ -45,8 +45,6 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 
 		add_action( 'admin_notices', array( $this, 'render_notice_elementor_2_9' ) );
 		add_action( 'wp_ajax_popup-trigger-url-for-elementor-pro--dismiss-notice--elementor-2-9', array( $this, 'ajax_dismiss_notice_elementor_2_9' ) );
-
-		add_action( 'elementor/frontend/after_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -219,24 +217,6 @@ class Popup_Trigger_URL_For_Elementor_Pro {
 	public function ajax_dismiss_notice_elementor_2_9() {
 		update_option( 'popup_trigger_url_for_elementor_pro__dismiss_notice__elementor_2_9', 1 );
 		wp_die();
-	}
-
-	/**
-	 * Add inline javascript for handling the old trigger URLs.
-	 */
-	public function enqueue_scripts() {
-		ob_start();
-		?>
-		(function() {
-			jQuery( document ).on( 'click', 'a[href^="#elementor-action"]', function( e ) {
-				e.preventDefault();
-				elementorFrontend.utils.urlActions.runAction( jQuery( e.currentTarget ).attr( 'href' ), e );
-			});
-		})();
-		<?php
-		$js = ob_get_clean();
-
-		wp_add_inline_script( 'elementor-frontend', $js );
 	}
 }
 
