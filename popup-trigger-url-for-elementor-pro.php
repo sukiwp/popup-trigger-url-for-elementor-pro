@@ -3,7 +3,7 @@
 Plugin Name: Popup Trigger URL for Elementor Pro
 Plugin URI: http://wordpress.org/plugins/popup-trigger-url-for-elementor-pro
 Description: Helps you to trigger Elementor Pro's popups (open, close, or toggle) from menus or any kind of link.
-Version: 1.0.4
+Version: 1.0.5
 Author: Suki WordPress Theme
 Author URI: https://sukiwp.com/
 License: GNU General Public License v2 or later
