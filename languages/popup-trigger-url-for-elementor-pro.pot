@@ -13,54 +13,42 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: popup-trigger-url-for-elementor-pro.php:65
+#: popup-trigger-url-for-elementor-pro.php:62
 msgid "Trigger URLs"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:82
+#: popup-trigger-url-for-elementor-pro.php:79
 msgid "Show URLs"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:85
+#: popup-trigger-url-for-elementor-pro.php:82
 msgid "Choose the trigger type, copy the URL, and paste into your links."
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:89
+#: popup-trigger-url-for-elementor-pro.php:86
 msgid "Type"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:90
+#: popup-trigger-url-for-elementor-pro.php:87
 msgid "URL"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:96
+#: popup-trigger-url-for-elementor-pro.php:93
 msgid "Open"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:97
+#: popup-trigger-url-for-elementor-pro.php:94
 msgid "Toggle"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:98
+#: popup-trigger-url-for-elementor-pro.php:95
 msgid "Close"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:99
+#: popup-trigger-url-for-elementor-pro.php:96
 msgid "Close (Don't Show Again)"
 msgstr ""
 
-#: popup-trigger-url-for-elementor-pro.php:111
+#: popup-trigger-url-for-elementor-pro.php:108
 msgid "IMPORTANT: You are required to set the \"Display Conditions\" settings of your popup to pages where you want the popup to show. Otherwise, your popup won't show up."
-msgstr ""
-
-#: popup-trigger-url-for-elementor-pro.php:181
-msgid "Message from \"Popup Trigger URL for Elementor Pro\" plugin:"
-msgstr ""
-
-#: popup-trigger-url-for-elementor-pro.php:182
-msgid "Since Elementor 2.9, there are some changes to the way Elementor generates the trigger URLs. This caused all your previously copied trigger URLs might not work anymore. Please review all your links. If it doesn't work, you can re-copy the new trigger URLs and then renew all your links."
-msgstr ""
-
-#: popup-trigger-url-for-elementor-pro.php:183
-msgid "Dismiss this notice forever"
 msgstr ""
